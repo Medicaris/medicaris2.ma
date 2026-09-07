@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
+/*
+  Medicaris — tokens de design.
+  Thème clair uniquement (scanning professionnel de jour, cf. PRODUCT.md).
+  Navy = ancrage de marque (logo, non négociable). Ambre = radiofréquence
+  (moteur de croissance, doit toujours primer visuellement). Teal = laser
+  (secondaire). Aucun blanc pur, aucun noir pur — neutres teintés navy.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ink: oklch(0.24 0.025 255);
+  --color-muted: oklch(0.48 0.018 255);
+
+  --color-navy: oklch(0.26 0.07 258);
+  --color-navy-deep: oklch(0.19 0.05 258);
+  --color-navy-soft: oklch(0.34 0.065 258);
+
+  --color-paper: oklch(0.985 0.005 75);
+  --color-paper-alt: oklch(0.955 0.009 70);
+  --color-line: oklch(0.89 0.008 70);
+
+  --color-rf: oklch(0.7 0.16 55);
+  --color-rf-ink: oklch(0.5 0.15 48);
+  --color-rf-soft: oklch(0.94 0.03 60);
+
+  --color-laser: oklch(0.62 0.1 195);
+  --color-laser-ink: oklch(0.44 0.08 195);
+  --color-laser-soft: oklch(0.93 0.025 195);
+
+  --shadow-card: 0 1px 2px oklch(0.2 0.02 255 / 0.04), 0 8px 24px oklch(0.2 0.02 255 / 0.07);
+  --shadow-lift: 0 12px 32px oklch(0.2 0.02 255 / 0.12);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-navy: var(--color-navy);
+  --color-navy-deep: var(--color-navy-deep);
+  --color-navy-soft: var(--color-navy-soft);
+  --color-paper: var(--color-paper);
+  --color-paper-alt: var(--color-paper-alt);
+  --color-line: var(--color-line);
+  --color-rf: var(--color-rf);
+  --color-rf-ink: var(--color-rf-ink);
+  --color-rf-soft: var(--color-rf-soft);
+  --color-laser: var(--color-laser);
+  --color-laser-ink: var(--color-laser-ink);
+  --color-laser-soft: var(--color-laser-soft);
+  --font-sans: var(--font-inter);
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
