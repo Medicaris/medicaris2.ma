@@ -18,15 +18,15 @@ export function Hero() {
   const reduce = useReducedMotion()
 
   return (
-    <section id="hero" className="relative flex min-h-[92vh] items-center overflow-hidden border-b border-paper/10 text-paper">
+    <section id="hero" className="relative flex min-h-[80vh] items-center overflow-hidden border-b border-paper/10 text-paper sm:min-h-[92vh]">
       <HeroBackground />
 
-      <div className="relative z-2 mx-auto max-w-6xl px-6 py-16">
+      <div className="relative z-2 mx-auto max-w-6xl px-6 py-8 sm:py-16">
         <motion.h1
           initial={reduce ? false : { opacity: 0, y: 24 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: MOTION.duration.slow, ease: MOTION.ease }}
-          className="text-[5.1vw] font-bold leading-[1.15] tracking-tight sm:text-[clamp(2.2rem,5.5vw,3.75rem)] sm:leading-[1.08]"
+          className="text-[7vw] font-bold leading-[1.1] tracking-tight sm:text-[clamp(2.2rem,5.5vw,3.75rem)] sm:leading-[1.08]"
         >
           {t('Des gestes moins lourds,', 'Lighter procedures,')}
           <br />
