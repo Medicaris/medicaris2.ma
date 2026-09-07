@@ -30,6 +30,7 @@ export default async function AdminArticlesPage() {
         {articles.length === 0 ? (
           <p className="p-8 text-center text-sm text-muted">Aucun article pour le moment.</p>
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="border-b border-line bg-paper-alt text-left text-xs font-semibold uppercase tracking-wide text-muted">
               <tr>
@@ -68,6 +69,7 @@ export default async function AdminArticlesPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>
