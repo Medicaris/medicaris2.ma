@@ -7,31 +7,15 @@ import { useT } from '@/lib/i18n/LocaleContext'
 import { useAudience } from '@/lib/audience/AudienceContext'
 import type { Equipment as EquipmentType } from '@/lib/supabase/types'
 import { Reveal } from '@/components/motion/Reveal'
-import { RFDiagram } from '@/components/motion/RFDiagram'
-import { LaserDiagram } from '@/components/motion/LaserDiagram'
 
-function EquipmentCard({ item, reverse }: { item: EquipmentType; reverse: boolean }) {
+function EquipmentCard({ item }: { item: EquipmentType }) {
   const t = useT()
   const { audience } = useAudience()
   const [specsOpen, setSpecsOpen] = useState(audience === 'professionnel')
   const isRf = item.energy_type === 'rf'
 
   return (
-    <Reveal
-      className={`grid items-center gap-10 rounded-3xl border border-line bg-paper p-8 shadow-card lg:grid-cols-2 lg:p-10 ${
-        reverse ? 'lg:[&>*:first-child]:order-2' : ''
-      }`}
-    >
-      <div className="overflow-hidden rounded-2xl">
-        {item.image_url ? (
-          <Image src={item.image_url} alt={t(item.name_fr, item.name_en)} width={320} height={240} className="h-full w-full object-cover" />
-        ) : isRf ? (
-          <RFDiagram className="h-full w-full" />
-        ) : (
-          <LaserDiagram className="h-full w-full" />
-        )}
-      </div>
-
+    <Reveal className="rounded-3xl border border-line bg-paper p-8 shadow-card lg:p-10">
       <div>
         <div className={`text-xs font-semibold uppercase tracking-widest ${isRf ? 'text-rf-ink' : 'text-laser-ink'}`}>
           {t(item.eyebrow_fr, item.eyebrow_en)}
@@ -104,11 +88,18 @@ export function Equipment({ equipment }: { equipment: EquipmentType[] }) {
               'Medicaris is the exclusive distributor of these manufacturers in Morocco. We deal with them directly, without intermediaries.'
             )}
           </p>
+          <Image
+            src="/img/equipements.webp"
+            alt={t('Équipements Medicaris', 'Medicaris equipment')}
+            width={896}
+            height={1195}
+            className="mx-auto mt-8 h-auto w-full max-w-md rounded-2xl"
+          />
         </Reveal>
 
-        <div className="mt-14 space-y-8">
-          {equipment.map((item, i) => (
-            <EquipmentCard key={item.id} item={item} reverse={i % 2 === 1} />
+        <div className="mt-14 grid gap-8 lg:grid-cols-2">
+          {equipment.map((item) => (
+            <EquipmentCard key={item.id} item={item} />
           ))}
         </div>
 
