@@ -6,7 +6,8 @@ import TiptapImage from '@tiptap/extension-image'
 import TiptapLink from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import TextAlign from '@tiptap/extension-text-align'
-import { Bold, Italic, Strikethrough, List, ListOrdered, Heading2, Heading3, Quote, Undo, Redo, Link2, AlignLeft, AlignCenter, AlignRight, Minus } from 'lucide-react'
+import Underline from '@tiptap/extension-underline'
+import { Bold, Italic, Underline as UnderlineIcon, Strikethrough, List, ListOrdered, Heading2, Heading3, Quote, Undo, Redo, Link2, AlignLeft, AlignCenter, AlignRight, Minus } from 'lucide-react'
 import { useEffect, type ReactNode } from 'react'
 
 interface TiptapEditorProps {
@@ -45,6 +46,7 @@ export function TiptapEditor({ content, onChange, placeholder }: TiptapEditorPro
       TiptapImage,
       TiptapLink.configure({ openOnClick: false }),
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      Underline,
       Placeholder.configure({ placeholder: placeholder ?? 'Rédigez le contenu ici…' }),
     ],
     content,
@@ -103,6 +105,9 @@ export function TiptapEditor({ content, onChange, placeholder }: TiptapEditorPro
         </ToolbarButton>
         <ToolbarButton onClick={() => editor.chain().focus().toggleStrike().run()} active={editor.isActive('strike')} title="Barré">
           <Strikethrough size={15} />
+        </ToolbarButton>
+        <ToolbarButton onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive('underline')} title="Souligné">
+          <UnderlineIcon size={15} />
         </ToolbarButton>
         <ToolbarButton onClick={addLink} active={editor.isActive('link')} title="Insérer un lien">
           <Link2 size={15} />
