@@ -21,7 +21,7 @@ export function ArticleForm({ article, action, submitLabel }: ArticleFormProps) 
   const [contentFr, setContentFr] = useState(article?.content_fr ?? '')
   const [contentEn, setContentEn] = useState(article?.content_en ?? '')
   const [imageUrl, setImageUrl] = useState(article?.cover_image_url ?? '')
-  const [published, setPublished] = useState(article?.published ?? false)
+  const [published, setPublished] = useState(article?.published ?? true)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')
 
