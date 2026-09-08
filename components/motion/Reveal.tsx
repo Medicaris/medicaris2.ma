@@ -20,7 +20,7 @@ export function Reveal({ children, delay = 0, y = MOTION.distance.base, classNam
     <Component
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, margin: '0px 0px 120px 0px' }}
       transition={{ duration: MOTION.duration.base, delay, ease: MOTION.ease }}
       className={className}
     >
