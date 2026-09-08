@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { useT } from '@/lib/i18n/LocaleContext'
 import type { ArticleMeta } from '@/lib/articles'
 import { Reveal } from '@/components/motion/Reveal'
@@ -48,6 +49,10 @@ export function ArticlesList({ articles }: { articles: ArticleMeta[] }) {
                 <div className="p-6">
                   <h2 className="text-base font-semibold leading-snug text-ink">{t(article.title_fr, article.title_en)}</h2>
                   <p className="mt-2 line-clamp-2 text-sm text-muted">{t(article.excerpt_fr, article.excerpt_en)}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy">
+                    {t('Lire la suite', 'Read more')}
+                    <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                  </span>
                 </div>
               </Link>
             </StaggerItem>
