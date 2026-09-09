@@ -1,7 +1,17 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { SITE_URL } from '@/lib/constants'
 
 export async function proxy(request: NextRequest) {
+  // www.medicaris.ma servait le meme site que medicaris.ma : deux adresses pour
+  // un seul contenu. Redirection permanente vers le domaine nu, celui que
+  // designe la balise canonical. Placee avant tout appel a Supabase.
+  const host = request.headers.get('host') ?? request.nextUrl.host
+  if (host.toLowerCase().startsWith('www.')) {
+    const target = new URL(`${request.nextUrl.pathname}${request.nextUrl.search}`, SITE_URL)
+    return NextResponse.redirect(target, 301)
+  }
+
   let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
@@ -64,5 +74,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)'],
 }
