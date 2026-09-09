@@ -1,11 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Phone } from 'lucide-react'
 import { useT } from '@/lib/i18n/LocaleContext'
 import { useAudience } from '@/lib/audience/AudienceContext'
-import { CONTACT, whatsappHref } from '@/lib/constants'
+import { CONTACT } from '@/lib/constants'
 import { Reveal } from '@/components/motion/Reveal'
+import { sendContactRequest } from '@/app/(marketing)/contact-actions'
 
 interface ContactFormValues {
   name: string
@@ -15,30 +17,32 @@ interface ContactFormValues {
   indication?: string
   volume?: string
   timeline?: string
+  // Champ piege : masque a l'ecran, seuls les robots le remplissent. Nom
+  // volontairement non semantique pour que le remplissage automatique des
+  // navigateurs ne le renseigne jamais a la place d'un vrai visiteur.
+  refInterne?: string
 }
+
+type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 export function Contact() {
   const t = useT()
   const { audience } = useAudience()
-  const { register, handleSubmit, reset } = useForm<ContactFormValues>()
+  const { register, handleSubmit, reset, formState } = useForm<ContactFormValues>()
+  const [status, setStatus] = useState<Status>('idle')
 
-  function onSubmit(values: ContactFormValues) {
-    const lines = [
-      'Demande via le site Medicaris',
-      '',
-      `Nom / Établissement : ${values.name}`,
-      `Email : ${values.email}`,
-    ]
-    if (audience === 'professionnel') {
-      if (values.specialty) lines.push(`Spécialité : ${values.specialty}`)
-      if (values.indication) lines.push(`Indication visée : ${values.indication}`)
-      if (values.volume) lines.push(`Volume d'actes : ${values.volume}`)
-      if (values.timeline) lines.push(`Délai souhaité : ${values.timeline}`)
+  async function onSubmit(values: ContactFormValues) {
+    setStatus('sending')
+    const result = await sendContactRequest({
+      ...values,
+      audience,
+    })
+    if (result.ok) {
+      setStatus('sent')
+      reset()
+    } else {
+      setStatus('error')
     }
-    lines.push('', values.message)
-
-    window.open(whatsappHref(lines.join('\n')), '_blank', 'noopener')
-    reset()
   }
 
   return (
@@ -73,7 +77,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl border border-line bg-paper p-8 shadow-card">
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative rounded-2xl border border-line bg-paper p-8 shadow-card">
               <div className="space-y-5">
                 <div>
                   <label htmlFor="name" className="text-sm font-medium text-ink">
@@ -160,12 +164,39 @@ export function Contact() {
                   />
                 </div>
 
+                <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+                  <label htmlFor="ref-interne">Ne pas remplir</label>
+                  <input id="ref-interne" tabIndex={-1} autoComplete="off" {...register('refInterne')} />
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-paper shadow-card transition-colors hover:bg-navy-deep"
+                  disabled={status === 'sending' || formState.isSubmitting}
+                  className="w-full rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-paper shadow-card transition-colors hover:bg-navy-deep disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {t('Envoyer la demande', 'Send Request')}
+                  {status === 'sending'
+                    ? t('Envoi en cours…', 'Sending…')
+                    : t('Envoyer la demande', 'Send Request')}
                 </button>
+
+                {status === 'sent' && (
+                  <p role="status" className="rounded-lg bg-navy/8 px-4 py-3 text-center text-sm font-medium text-navy">
+                    {t(
+                      'Demande envoyée. Nous revenons vers vous sous 24 heures ouvrables.',
+                      'Request sent. We will get back to you within 24 business hours.'
+                    )}
+                  </p>
+                )}
+
+                {status === 'error' && (
+                  <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-center text-sm font-medium text-red-700">
+                    {t(
+                      `L’envoi a échoué. Écrivez-nous directement au ${CONTACT.phoneDisplay} ou réessayez dans un instant.`,
+                      `Sending failed. Call us on ${CONTACT.phoneDisplay} or try again in a moment.`
+                    )}
+                  </p>
+                )}
+
                 <p className="text-center text-xs text-muted">{t('Réponse sous 24 heures ouvrables.', 'Reply within 24 business hours.')}</p>
               </div>
             </form>
