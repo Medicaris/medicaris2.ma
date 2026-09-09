@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Newspaper, Stethoscope, Cpu, ListChecks, Settings, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Newspaper, Stethoscope, Cpu, ListChecks, Quote, Settings, LogOut, Menu, X } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 const LINKS = [
@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/admin/domaines', label: 'Domaines cliniques', icon: Stethoscope },
   { href: '/admin/equipements', label: 'Équipements', icon: Cpu },
   { href: '/admin/services', label: 'Services', icon: ListChecks },
+  { href: '/admin/temoignages', label: 'Témoignages', icon: Quote },
   { href: '/admin/parametres', label: 'Paramètres', icon: Settings },
 ]
 

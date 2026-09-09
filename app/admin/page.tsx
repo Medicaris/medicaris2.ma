@@ -1,16 +1,17 @@
 import Link from 'next/link'
-import { Newspaper, Stethoscope, Cpu, ListChecks, AlertTriangle } from 'lucide-react'
+import { Newspaper, Stethoscope, Cpu, ListChecks, Quote, AlertTriangle } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { isMaintenanceMode } from '@/lib/settings'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
 
-  const [articles, domains, equipment, services, maintenance] = await Promise.all([
+  const [articles, domains, equipment, services, testimonials, maintenance] = await Promise.all([
     supabase.from('articles').select('id', { count: 'exact', head: true }).eq('published', true),
     supabase.from('clinical_domains').select('id', { count: 'exact', head: true }).eq('active', true),
     supabase.from('equipment').select('id', { count: 'exact', head: true }).eq('active', true),
     supabase.from('services').select('id', { count: 'exact', head: true }),
+    supabase.from('testimonials').select('id', { count: 'exact', head: true }).eq('active', true),
     isMaintenanceMode(),
   ])
 
@@ -19,6 +20,7 @@ export default async function AdminDashboard() {
     { href: '/admin/domaines', label: 'Domaines cliniques actifs', count: domains.count ?? 0, icon: Stethoscope },
     { href: '/admin/equipements', label: 'Équipements actifs', count: equipment.count ?? 0, icon: Cpu },
     { href: '/admin/services', label: 'Étapes de service', count: services.count ?? 0, icon: ListChecks },
+    { href: '/admin/temoignages', label: 'Témoignages actifs', count: testimonials.count ?? 0, icon: Quote },
   ]
 
   return (

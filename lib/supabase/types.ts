@@ -93,3 +93,21 @@ export interface Setting {
   key: string
   value: string | null
 }
+
+export interface Testimonial {
+  id: string
+  initials: string
+  quote_fr: string
+  quote_en: string
+  name_fr: string
+  name_en: string
+  role_fr: string
+  role_en: string
+  order_index: number
+  active: boolean
+  created_at: string
+  updated_at: string
+}
+
+export type TestimonialInsert = Omit<Testimonial, 'id' | 'created_at' | 'updated_at'>
+export type TestimonialUpdate = Partial<TestimonialInsert>

@@ -2,6 +2,7 @@ import { getActiveDomains } from '@/lib/clinical-domains'
 import { getActiveEquipment } from '@/lib/equipment'
 import { getServices } from '@/lib/services'
 import { getPublishedArticles } from '@/lib/articles'
+import { getActiveTestimonials } from '@/lib/testimonials'
 import { Hero } from '@/components/home/Hero'
 import { ClinicalDomains } from '@/components/home/ClinicalDomains'
 import { Equipment } from '@/components/home/Equipment'
@@ -12,11 +13,12 @@ import { NewsPreview } from '@/components/home/NewsPreview'
 import { Contact } from '@/components/home/Contact'
 
 export default async function HomePage() {
-  const [domains, equipment, services, articles] = await Promise.all([
+  const [domains, equipment, services, articles, testimonials] = await Promise.all([
     getActiveDomains(),
     getActiveEquipment(),
     getServices(),
     getPublishedArticles(),
+    getActiveTestimonials(),
   ])
 
   return (
@@ -25,7 +27,7 @@ export default async function HomePage() {
       <ClinicalDomains domains={domains} />
       <Equipment equipment={equipment} />
       <Services services={services} />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
       <Company />
       <NewsPreview articles={articles} />
       <Contact />
