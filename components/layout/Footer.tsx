@@ -23,7 +23,7 @@ export function Footer() {
             <Image
               src="/img/logo.webp"
               alt="Medicaris SARL"
-              width={140}
+              width={90}
               height={56}
               className="h-11 w-auto brightness-0 invert"
             />

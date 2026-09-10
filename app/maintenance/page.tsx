@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function MaintenancePage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-navy-deep px-6 text-center text-paper">
-      <Image src="/img/logo.webp" alt="Medicaris SARL" width={140} height={56} className="h-12 w-auto brightness-0 invert" />
+      <Image src="/img/logo.webp" alt="Medicaris SARL" width={90} height={56} className="h-12 w-auto brightness-0 invert" />
       <h1 className="mt-8 text-2xl font-bold">Site en maintenance</h1>
       <p className="mt-3 max-w-sm text-sm leading-relaxed text-paper/70">
         Le site est momentanément indisponible. Nous serons de retour très prochainement.

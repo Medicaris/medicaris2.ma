@@ -55,7 +55,7 @@ export function AdminSidebar() {
       {/* Barre mobile */}
       <div className="flex items-center justify-between border-b border-line bg-paper px-4 py-3 lg:hidden">
         <Link href="/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-          <Image src="/img/logo.webp" alt="Medicaris SARL" width={100} height={40} className="h-7 w-auto" />
+          <Image src="/img/logo.webp" alt="Medicaris SARL" width={64} height={40} className="h-7 w-auto" />
           <span className="text-xs font-semibold uppercase tracking-wide text-muted">Admin</span>
         </Link>
         <button
@@ -78,7 +78,7 @@ export function AdminSidebar() {
         }`}
       >
         <Link href="/" target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 px-2 lg:flex">
-          <Image src="/img/logo.webp" alt="Medicaris SARL" width={120} height={48} className="h-8 w-auto" />
+          <Image src="/img/logo.webp" alt="Medicaris SARL" width={77} height={48} className="h-8 w-auto" />
           <span className="text-xs font-semibold uppercase tracking-wide text-muted">Admin</span>
         </Link>
         {nav}

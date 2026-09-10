@@ -31,13 +31,13 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 h-[68px] border-b border-line bg-paper/95 backdrop-blur-md transition-shadow ${
+      className={`fixed inset-x-0 top-0 z-50 h-17 border-b border-line bg-paper/95 backdrop-blur-md transition-shadow ${
         scrolled ? 'shadow-card' : ''
       }`}
     >
       <div className="mx-auto flex h-full max-w-6xl items-center gap-6 px-6">
         <Link href="/#hero" className="flex shrink-0 items-center">
-          <Image src="/img/logo.webp" alt="Medicaris SARL" width={150} height={60} priority className="h-[52px] w-auto" />
+          <Image src="/img/logo.webp" alt="Medicaris SARL" width={96} height={60} priority className="h-13 w-auto" />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-0.5 lg:flex">
@@ -78,7 +78,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="fixed inset-x-0 top-[68px] flex max-h-[calc(100vh-68px)] flex-col gap-1 overflow-y-auto border-b border-line bg-paper px-4 py-4 lg:hidden">
+        <div className="fixed inset-x-0 top-17 flex max-h-[calc(100vh-68px)] flex-col gap-1 overflow-y-auto border-b border-line bg-paper px-4 py-4 lg:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
