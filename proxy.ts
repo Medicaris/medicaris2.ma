@@ -58,13 +58,19 @@ export async function proxy(request: NextRequest) {
     return supabaseResponse
   }
 
+  const { data: setting } = await supabase.from('settings').select('value').eq('key', 'maintenance_mode').single()
+  const maintenanceActive = setting?.value === 'true'
+
   if (isMaintenancePage) {
+    if (!maintenanceActive) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/'
+      return NextResponse.redirect(url)
+    }
     return supabaseResponse
   }
 
-  const { data: setting } = await supabase.from('settings').select('value').eq('key', 'maintenance_mode').single()
-
-  if (setting?.value === 'true') {
+  if (maintenanceActive) {
     const url = request.nextUrl.clone()
     url.pathname = '/maintenance'
     return NextResponse.redirect(url)
