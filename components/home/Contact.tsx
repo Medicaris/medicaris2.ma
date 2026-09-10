@@ -57,7 +57,7 @@ export function Contact() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted">
             {t(
-              'Démonstration sur site, devis, information technique ou demande de partenariat fabricant — écrivez-nous, nous répondons sous 24 heures ouvrables.',
+              'Démonstration sur site, devis, information technique ou demande de partenariat fabricant. Écrivez-nous, nous répondons sous 24 heures ouvrables.',
               'On-site demonstration, quotation, technical information or manufacturer partnership enquiry — write to us, we reply within 24 business hours.'
             )}
           </p>

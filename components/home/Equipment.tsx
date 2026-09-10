@@ -80,12 +80,12 @@ export function Equipment({ equipment }: { equipment: EquipmentType[] }) {
             {t('Équipements', 'Equipment')}
           </span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            {t('Les systèmes que nous distribuons', 'The systems we distribute')}
+            {t('Une gamme sélectionnée, un interlocuteur unique', 'A curated range, a single point of contact')}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted">
             {t(
-              'Medicaris est le distributeur exclusif de ces fabricants au Maroc. Nous traitons en direct avec eux, sans intermédiaire.',
-              'Medicaris is the exclusive distributor of these manufacturers in Morocco. We deal with them directly, without intermediaries.'
+              'Chaque système est choisi pour sa fiabilité clinique. Distributeur exclusif au Maroc, Medicaris est votre seul contact, du devis au support technique.',
+              'Each system is selected for its clinical reliability. As the exclusive distributor in Morocco, Medicaris is your single point of contact, from quotation to technical support.'
             )}
           </p>
           <Image
@@ -109,6 +109,14 @@ export function Equipment({ equipment }: { equipment: EquipmentType[] }) {
             'Full technical datasheets and additional product lines available on request.'
           )}
         </p>
+        <div className="mt-6 text-center">
+          <a
+            href="#contact"
+            className="inline-block rounded-full border border-navy px-6 py-3 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-paper"
+          >
+            {t('Nous contacter pour en savoir plus', 'Contact us to learn more')}
+          </a>
+        </div>
       </div>
     </section>
   )

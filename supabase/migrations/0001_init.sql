@@ -141,8 +141,8 @@ create policy "authenticated delete equipment images" on storage.objects
 -- ── Contenu de départ : services (4 étapes fixes, portées de site/index.html) ──
 insert into services (step_number, title_fr, title_en, body_fr, body_en, order_index) values
 (1, 'Sélection', 'Selection',
- 'Nous partons de votre pratique — volume d''actes, indications, plateau technique — pour définir la configuration utile, sans surdimensionner.',
- 'We start from your practice — case volume, indications, facilities — to define the right configuration, without overspecifying.', 1),
+ 'Nous partons de votre pratique (volume d''actes, indications, plateau technique) pour définir la configuration utile, sans surdimensionner.',
+ 'We start from your practice (case volume, indications, facilities) to define the right configuration, without overspecifying.', 1),
 (2, 'Importation', 'Import',
  'Commande auprès du fabricant, transport, formalités douanières et livraison à la clinique. Un interlocuteur unique du bon de commande à la réception.',
  'Order placed with the manufacturer, shipping, customs formalities and delivery to the clinic. One single contact from purchase order to delivery.', 2),
